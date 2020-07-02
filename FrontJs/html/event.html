@@ -1,0 +1,46 @@
+<html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="example-2">
+    <!-- `greet` 是在下面定义的方法名 -->
+    <button v-on:click="greet">Greet</button>
+</div>
+<!--标红是什么意思？-->
+<table width="900" border="2">
+    <tr>
+        <td>title is title</td>
+        <td>standard input</td>
+    </tr>
+    <tr>
+        <td>next1</td>
+        <td>next2</td>
+    </tr>
+</table>
+<div>
+    <b>
+        bold world,theres is a change, save it ,it will change too;
+    </b>
+</div>
+<script>
+    var example2 = new Vue({
+        el: '#example-2',
+        data: {
+            name: 'Vue.js'
+        },
+        // 在 `methods` 对象中定义方法
+        methods: {
+            greet: function (event) {
+                // `this` 在方法里指向当前 Vue 实例
+                alert('Hello ' + this.name + '!')
+                // `event` 是原生 DOM 事件
+                if (event) {
+                    alert(event.target.tagName)
+                }
+            }
+        }
+    })
+    // 也可以用 JavaScript 直接调用方法,Vue使用的还是js语法
+  //  example2.greet() // => 'Hello Vue.js!'
+</script>
+
+</html>

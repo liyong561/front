@@ -1,0 +1,43 @@
+<html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!--为什么这个没有效果？-->
+<div v-bind:style="styleObject">
+    this no parent label
+    <p>this is from vue source</p>
+</div>
+
+<div v-if="type === 'A'">
+    A is
+</div>
+<template v-if="ok">
+    <h1>Title</h1>
+    <p>Paragraph 1</p>
+    <p>Paragraph 2</p>
+</template>
+<template v-if="loginType === 'username'">
+    <label>Username</label>
+    <input placeholder="Enter your username">
+</template>
+<template v-else>
+    <label>Email</label>
+    <input placeholder="Enter your email address">
+</template>
+<div>
+    <b>
+        bold world,theres is a change, save it ,it will change too;
+    </b>
+</div>
+<script>
+    var vm = new Vue({
+        data: {
+            styleObject: {
+                // color: red, 表示值吗？
+                color: 'red',
+                fontSize: '13px'
+            },
+            type: 'As'
+        }
+    })
+</script>
+
+</html>

@@ -1,0 +1,41 @@
+<html>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<h1>
+    head22
+</h1>
+<div id ="app7">
+
+<ol>
+    <!-- 创建一个 todo-item 组件的实例 -->
+    <todo-item name1="e122e"></todo-item>
+  </ol>
+
+  <ol>
+    <!-- 创建一个 todo-item 组件的实例 -->
+    <todo-item v-bind:name1='name1'></todo-item>
+  </ol>
+</div>
+
+  <script>
+
+
+    // 都要注明vue用于哪个name吗
+    Vue.component('todo-item',{
+    props :['name1'],
+    template: '<li>{{name1}}</li>'})
+
+    var app = new Vue({
+            el: '#app7',
+            data: {
+                'name1':'liyo'
+            }
+    }
+    )
+    </script>
+
+
+
+
+</html>

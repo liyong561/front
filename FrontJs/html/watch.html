@@ -1,0 +1,47 @@
+<html>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<h1>
+    head
+</h1>
+
+<!--v-bind 和 v-model有什么区别-->
+<div id="app6">
+    <!-- 会跟随用户的输入变化而变化-->
+    <p>{{ message }}</p>
+    <input v-model="message">
+
+      <span v-bind:title="message2">
+        鼠标悬停几秒钟查看此处动态绑定的提示信息！
+      </span>
+    </div>
+</div> 
+
+<script>
+    function f(){
+        console.log('dd')
+    }
+var vm = new Vue({
+  el: '#demo',
+  data: {
+    firstName: 'Foo',
+    lastName: 'Bar',
+    fullName: 'Foo Bar'
+  },
+
+  // 这个watch是一个比较怪的语法，侦听firstname的数据变化
+  watch: {
+    firstName: function (val) {
+      this.fullName = val + ' ' + this.lastName
+    },
+    lastName: function (val) {
+      this.fullName = this.firstName + ' ' + val
+    }
+  }
+})
+</script>
+
+
+
+</html>

@@ -1,0 +1,34 @@
+<html>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<h1>
+  head
+</h1>
+
+<a v-on:click="doSomething">href</a>
+</div>
+
+<script>
+  // created称之为vue对象创建过程中的钩子
+
+  var data = { a: 11 }
+  var app6 = new Vue({
+    data: data,
+    created: function () {
+      // `this` 指向 vm 实例
+      console.log('a is: ' + this.a)
+    }
+  })
+  // app6引用的就是data？
+  console.log(data.a === app6.a)
+  // like python,can ignore the quoto
+  app6.addAttr = 'liyong'
+  console.log(app6.addAttr)
+
+  vm.$watch('a', function (newValue, oldValue) {
+    // 这个回调将在 `vm.a` 改变后调用,新就值都给了，非常的方便
+  })
+</script>
+
+</html>
