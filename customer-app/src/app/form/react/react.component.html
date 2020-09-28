@@ -1,0 +1,37 @@
+<!--FormControl来自于-->
+<!--导入ReactiveFormsModule控件-->
+Favorite Color: <input type="text" [formControl]="favoriteColorControl">
+
+<p>input value is: {{favoriteColorControl.value}}</p>
+<br>
+<button (click) = "update()">更新表格内容</button>
+<div>
+Favorite Color: <input type="text" [(ngModel)]="favoriteColor">
+<br>
+<p>this is double data stream:{{favoriteColor}}</p>
+</div>
+
+<div>
+    <!--数据绑定-->
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        // 有模板代码生成这个，而不是首先formControlName
+        <label>
+          First Name:
+          <input type="text" formControlName="firstName">
+        </label>
+      
+        <label>
+          Last Name:
+          <input type="text" formControlName="lastName">
+        </label>
+        <br>
+        <nz-date-picker formControlName ="date"></nz-date-picker>
+        <br>
+        <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+      </form>
+
+      <br> 
+      <button (click) ="updateProfile()">update Profile</button>
+      <nz-date-picker [(ngModel)]="date2" (ngModelChange)="onChange($event)"></nz-date-picker>
+      <br>
+</div>

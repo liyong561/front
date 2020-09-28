@@ -1,0 +1,203 @@
+<ng-container [ngSwitch]="item.control">
+
+  <ng-container *ngSwitchCase="'date'">
+    <nz-datepicker [ngStyle]="{'width.px': width}" [formControl]="form.get(item.field)"></nz-datepicker>
+  </ng-container>
+
+
+  <ng-container *ngSwitchCase="'year'">
+    <nz-select [formControl]="form.get(item.field)" nzPlaceHolder="请选择"
+               [nzAllowClear]="item.clearable" [nzShowSearch]="item.showSearch">
+      <nz-option style="width: 100%;" *ngFor="let option of item.years"
+                 [nzLabel]="option"
+                 [nzValue]="option"
+      ></nz-option>
+    </nz-select>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'date_with_disable'">
+    <nz-datepicker [formControl]="form.get(item.field)" [nzDisabledDate]="item.nzDisabledDate"></nz-datepicker>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'date_readonly'">
+    <nz-datepicker
+      [nzPlaceHolder]="item.placeholder ? item.placeholder : ''"
+      [formControl]="form.get(item.field)"
+      [nzDisabled]="true"></nz-datepicker>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'select'">
+    <nz-select [formControl]="form.get(item.field)" nzPlaceHolder="请选择"
+               nzAllowClear [nzShowSearch]="item.showSearch"  (nzSearchChange)="searchChange($event)"
+               (nzOpenChange)="openChange($event)"
+    >
+      <nz-option style="width: 100%;" *ngFor="let option of item.control_select_options"
+                 [nzLabel]="option.label"
+                 [nzValue]="option.value"
+      ></nz-option>
+    </nz-select>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'dict_enum_single'">
+    <app-dict-enum
+      [_formControl]="form.get(item.field)"
+      [enumKey]="item.enum_key"
+      [disabled]="item.readonly"
+    ></app-dict-enum>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'dict_enum_multi'">
+    <app-dict-enum
+      [_formControl]="form.get(item.field)"
+      [enumKey]="item.enum_key"
+      [nzMultiple]="true"
+    ></app-dict-enum>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'select_enum'">
+    <app-enum-select
+      [enumKey]="item.enum_key"
+      [_formControl]="form.get(item.field)"
+      [nzAllowClear]="!form.get(item.field).validator"
+    ></app-enum-select>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'select_readonly'">
+    <nz-select [formControl]="form.get(item.field)" nzPlaceHolder="" [nzDisabled]="true">
+      <nz-option style="width: 100%;" *ngFor="let option of item.control_select_options"
+                 [nzLabel]="option.label"
+                 [nzValue]="option.value"
+      ></nz-option>
+    </nz-select>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'textarea'">
+    <nz-input style="max-width: 804px; min-width: 200px;"  [nzType]="'textarea'" [nzRows]="4" [formControl]="form.get(item.field)"></nz-input>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'multi_select'">
+    <app-multi-select
+      [_formControl]="form.get(item.field)"
+      [options]="item.control_select_options"
+    >
+    </app-multi-select>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'search_select'">
+    <app-search-select
+      [_formControl]="form.get(item.field)"
+      [_updateFunc]="item.control_search_select_updateFunc"
+      [_labelFormControl]="form.get(item.control_search_select_labels_field)"
+    ></app-search-select>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'search_select_single'">
+    <app-search-select-single
+      [_formControl]="form.get(item.field)"
+      [_updateFunc]="item.control_search_select_updateFunc"
+      [_labelFormControl]="form.get(item.control_search_select_labels_field)"
+      [nzAllowClear]="!form.get(item.field).validator"
+    ></app-search-select-single>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'search_select_single_contract'">
+    <app-search-select-single-contract
+      [_formControl]="form.get(item.field)"
+      [_updateFunc]="item.control_search_select_updateFunc"
+    ></app-search-select-single-contract>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'number'">
+    <app-js-number-input
+      [min]="item.number_min"
+      [max]="item.number_max"
+      [step]="item.number_step"
+      [digits]="item.number_digits"
+      [width]="item.width"
+      [_formControl]="form.get(item.field)"
+    >
+    </app-js-number-input>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'currency'">
+    <app-js-number-input
+      [min]="0"
+      [step]="0.01"
+      [digits]="2"
+      [_formControl]="form.get(item.field)"
+      [width]="width"
+    >
+    </app-js-number-input>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'two_number'">
+    <app-two-number
+      [_formControl1]="form.get(item.two_number_1.field)"
+      [_formControl2]="form.get(item.two_number_2.field)"
+      [number1]="item.two_number_1"
+      [number2]="item.two_number_2"
+    >
+    </app-two-number>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'percent'">
+    <app-percent-input
+      [_formControl]="form.get(item.field)"
+      [width]="item.width"
+    ></app-percent-input>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'location_select'">
+    <app-location-select
+      [lon_formControl]="form.get(item.location_lon_field)"
+      [lat_formControl]="form.get(item.location_lat_field)"
+      [address_formControl]="form.get(item.field)"
+    ></app-location-select>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'editable_table'">
+    <app-table-eh
+      [rowsFormArray]="form.get(item.field)"
+      [columns]="item.editable_table_columns"
+      [editMode]="true"
+      [rowActions]="item.editable_table_row_actions"
+      [enableRowEdit]="item.enableRowEdit"
+      [enableRowDelete]="item.enableRowDelete"
+      [rowEditAction]="item.rowEditAction"
+      [rowDeleteAction]="item.rowDeleteAction"
+      [showNewBtn]="item.enableRowAdd"
+    ></app-table-eh>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'datetime'">
+    <nz-datepicker [ngStyle]="{'width.px': width}" [nzShowTime]="true" [nzPlaceHolder]="'选择时间'"
+                   [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [formControl]="form.get(item.field)"></nz-datepicker>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'date_years'">
+    <nz-datepicker [(ngModel)]="_month" [nzPlaceHolder]="'选择年月'" [nzFormat]="'YYYY-MM'" [nzMode]="'month'"
+                   [formControl]="form.get(item.field)"></nz-datepicker>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'cascade'">
+    <app-search-cascade
+      [options]="item.options"
+      [_formControl]="form.get(item.field)"
+    ></app-search-cascade>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'date_range'">
+    <app-date-range
+      [dtStart]="form.get(item.dateRangeStartDtField)"
+      [dtEnd]="form.get(item.dateRangeEndDtField)"
+      [editMode]="true"
+    ></app-date-range>
+  </ng-container>
+
+  <ng-container  *ngSwitchDefault>
+    <nz-input [ngStyle]="{'width': width}" [nzReadonly]="item.readonly" [formControl]="form.get(item.field)"></nz-input>
+  </ng-container>
+  <span *ngIf="showErrorMessage && form.get(item.field).touched && form.get(item.field).invalid" style="color: #ff625b; margin-left: 4px;">必填项</span>
+</ng-container>
+
+

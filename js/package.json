@@ -1,0 +1,14 @@
+{
+    "name": "learn-javascript",
+    "description": "a demo to learn javascript",
+    "author": "",
+    "type": "module",
+    "main": "main.js",
+    "dependencies": {
+        "rxjs": "^6.6.3"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo 'there is no this command'"
+    }
+}

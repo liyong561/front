@@ -1,0 +1,44 @@
+<ng-container *ngIf="!useEditableMode">
+  <button nz-button (click)="edit.emit()">编辑</button>
+  <button nz-button  (click)="back.emit()">返回</button>
+</ng-container>
+
+<ng-container *ngIf="useEditableMode">
+
+  <ng-container *ngIf="useCustomerBtns && customerBtns">
+    <ng-container *ngFor="let btn of customerBtns">
+      <button nz-button
+              *ngIf="!btn.hideOnAddMode"
+              [disabled]="btn.disableFunc && btn.disableFunc('')"
+              [nzType]="btn.type"  (click)="btn.action()">{{btn.title}}</button>
+    </ng-container>
+    <ng-container *ngIf="appendDefaultBtns">
+      <ng-container *ngIf="!_addMode">
+        <button *ngIf="!editMode" nz-button
+                [disabled]="editDisableFunc && editDisableFunc()"
+                (click)="onEditMode.emit(); editMode=true">编辑</button>
+        <button *ngIf="!editMode && showAttachmentsManage" nz-button  (click)="attachmentsManage.emit()">附件管理</button>
+        <button *ngIf="editMode" nz-button  (click)="editMode=false">取消</button>
+        <button *ngIf="editMode" [disabled]="addOrEditBtnDisabled" [nzType]="'primary'" nz-button  (click)="editModeSubmit.emit()">保存</button>
+      </ng-container>
+      <ng-container *ngIf="_addMode">
+        <button *ngIf="editMode" [disabled]="addOrEditBtnDisabled" [nzType]="'primary'" nz-button  (click)="addModeSubmit.emit()">保存</button>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="!useCustomerBtns">
+    <ng-container *ngIf="!_addMode">
+      <button *ngIf="!editMode"
+              [disabled]="editDisableFunc && editDisableFunc()"
+              (click)="onEditMode.emit(); editMode=true">编辑</button>
+      <button *ngIf="!editMode && showAttachmentsManage" nz-button  (click)="attachmentsManage.emit()">附件管理</button>
+      <button *ngIf="editMode" nz-button  (click)="editMode=false">取消</button>
+      <button *ngIf="editMode" [disabled]="addOrEditBtnDisabled" [nzType]="'primary'" nz-button  (click)="editModeSubmit.emit()">保存</button>
+    </ng-container>
+    <ng-container *ngIf="_addMode">
+      <button *ngIf="editMode" [disabled]="addOrEditBtnDisabled" [nzType]="'primary'" nz-button  (click)="addModeSubmit.emit()">保存</button>
+    </ng-container>
+  </ng-container>
+
+</ng-container>

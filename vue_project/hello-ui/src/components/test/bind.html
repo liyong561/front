@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<body>
+
+    <div id="app-4">
+        <ol>
+            <!--相当于的*ngFor-->
+          <li v-for="todo in todos">
+            {{ todo.text }}
+          </li>
+        </ol>
+      </div>
+
+</body>
+<script>
+
+var app4 = new Vue({
+  el: '#app-4',
+  data: {
+    todos: [
+      { text: '学习 JavaScript' },
+      { text: '学习 Vue' },
+      { text: '整个牛项目' }
+    ]
+  }
+})
+</script>
+</html>

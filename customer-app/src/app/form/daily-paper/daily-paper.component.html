@@ -1,0 +1,13 @@
+<nz-breadcrumb>
+    <nz-breadcrumb-item>风场管理</nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+      <a [routerLink]="'/pages/wind-farm/farm'">风场管理</a>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+      <ng-container [ngSwitch]="mode">
+        <ng-container *ngSwitchCase="'add'">新建</ng-container>
+        <ng-container *ngSwitchCase="'edit'">编辑</ng-container>
+        <ng-container *ngSwitchCase="'detail'">详情</ng-container>
+      </ng-container>
+    </nz-breadcrumb-item>
+  </nz-breadcrumb>

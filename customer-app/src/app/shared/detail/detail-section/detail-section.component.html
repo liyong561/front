@@ -1,0 +1,53 @@
+<div class="content-section">
+  <div class="section-title">{{section.title}}</div>
+  <div class="section-body"  [ngStyle]="{'margin-top': section.sectionType === 'table' ? '10px' : '20px'}">
+
+    <div class="detail-row" nz-row  [nzType]="'flex'" [nzAlign]="'middle'" *ngFor="let row of section.rows">
+      <ng-container *ngFor="let item of row.items">
+
+        <div *ngIf="!item.hideTitle" nz-col [nzSpan]="item.titleSpan ? item.titleSpan : twoColumns ? 5 : 3" class="detail-row-item-title">
+          <ng-container *ngIf="editMode && !item.related">
+          <span *ngIf="form.get(item.field).validator">
+            <span style="color: red; margin-right: 3px; margin-left: -8px;">*</span>
+            {{item.title}}：
+          </span>
+            <span *ngIf="!form.get(item.field).validator"> {{item.title}}：</span>
+          </ng-container>
+          <ng-container *ngIf="!editMode || item.related">
+            <span>{{item.title}}：</span>
+          </ng-container>
+        </div>
+
+        <!-- 内容 -->
+        <div nz-col [nzSpan]="item.contentSpan ? item.contentSpan : twoColumns ? 7 : 5" class="detail-row-item-content">
+          <ng-container *ngIf="editMode && !item.related">
+            <ng-container *ngIf="!(item.relatedFun && item.relatedFun(form.value))">
+              <app-edit-control
+                [item]="item"
+                [form]="form"
+                [showErrorMessage]="showErrorMessage"
+              ></app-edit-control>
+            </ng-container>
+
+            <ng-container *ngIf="item.relatedFun && item.relatedFun(form.value)">
+              <app-display-control
+                [form]="form"
+                [item]="item"
+                [data]="data"
+              ></app-display-control>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngIf="!editMode || item.related">
+            <app-display-control
+              [form]="form"
+              [item]="item"
+              [data]="data"
+            ></app-display-control>
+          </ng-container>
+        </div>
+
+      </ng-container>
+    </div>
+  </div>
+</div>

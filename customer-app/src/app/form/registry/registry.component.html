@@ -1,0 +1,86 @@
+<nz-space nzDirection="vertical">
+ 
+      <nz-card nzTitle="1.基本信息" style="width: 900px;">
+        <p>Card content</p>
+        <p>Card content</p>
+      </nz-card>
+
+      <nz-card nzTitle="2.收货情况">
+        <nz-table #basicTable [nzData]="listOfData">
+            <thead>
+              <tr>
+                <th>风机编号</th>
+                <th>机舱</th>
+                <th>轮毂</th>
+                <th>叶片</th>
+                <th>电机</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of basicTable.data">
+                <td>{{data.num}}</td>
+                <td>{{ data.room }}</td>
+                <td>{{ data.hub }}</td>
+                <td>{{ data.blade }}</td>
+                <td>{{data.generator}}</td>
+              </tr>
+            </tbody>
+          </nz-table>
+      </nz-card>
+    
+        <nz-card nzTitle="3.风机交付进度" >
+            <nz-table #basicTable2 [nzData]="deliveryProgress">
+                <thead>
+                  <tr>
+                    <th>机位</th>
+                    <th>风场工序</th>
+                    <th>风机交付</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of basicTable2.data">
+                    <td>{{data.seat}}</td>
+                    <td>{{ data.fanWorkOrder}}</td>
+                    <td>{{ data.fanDelivery }}</td>
+                  </tr>
+                </tbody>
+              </nz-table>
+        </nz-card>
+  
+        <nz-card nzTitle="4.人员和工时统计" >
+          <nz-table #basicTable3 [nzData]="personHour">
+            <thead>
+              <tr>
+                <th>员工编号</th>
+                <th>员工名称</th>
+                <th>电话号码</th>
+                <th>项目名称</th>
+                <th>开始结束</th>
+                <th>结束时间</th>
+                <th>天数</th>
+                <th>创建人</th>
+                <th>创建时间</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of basicTable3.data">
+                <td>{{data.empCode}}</td>
+                <td>{{ data.empName}}</td>
+                <td>{{ data.phone}}</td>
+                <td>{{data.entryName}}</td>
+                <td>{{data.startTime | date :"yyyy-MM-dd"}}</td>
+                <td>{{data.endTime | date :"yyyy-MM-dd"}}</td>
+                <td>{{data.days}}</td>
+                <td>{{data.createUser}}</td>
+                <td>{{data.createTime | date :"yyyy-MM-dd"}}</td>
+              </tr>
+            </tbody>
+          </nz-table>
+        </nz-card>
+
+        <nz-card nzTitle="5.需要协调事项">
+          <p>Card content</p>
+          <p>Card content</p>
+        </nz-card>
+
+  </nz-space>

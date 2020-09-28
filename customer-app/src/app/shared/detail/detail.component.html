@@ -1,0 +1,97 @@
+<div class="js-container">
+  <div class="js-action" *ngIf="showEditAction" style="z-index: 100">
+    <ng-container *ngIf="editMode">
+      <ng-template [ngTemplateOutlet]="_extraActions"></ng-template>
+    </ng-container>
+
+    <ng-container *ngIf="!editMode">
+      <ng-template [ngTemplateOutlet]="_detailModeExtraActions"></ng-template>
+    </ng-container>
+
+    <ng-container *ngIf="_addMode">
+      <ng-template [ngTemplateOutlet]="addModeExtraActions"></ng-template>
+    </ng-container>
+
+    <ng-container *ngIf="useCustomerBtns && customerBtns">
+
+      <ng-container *ngIf="!_addMode">
+        <ng-container *ngFor="let btn of customerBtns">
+
+          <button nz-button
+                  *ngIf="btn.hideOnEditMode ? !editMode : true"
+                  [disabled]="btn.disableFunc && btn.disableFunc('')"
+                  [nzType]="btn.type" (click)="btn.action()">{{btn.title}}</button>
+
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="appendDefaultBtns">
+        <ng-container *ngIf="!_addMode">
+          <button *ngIf="!editMode && showEditBtn" nz-button
+                  [disabled]="editDisableFunc && editDisableFunc()"
+                  (click)="startEdit()">编辑</button>
+          <button *ngIf="!editMode && showAttachmentsManage" nz-button (click)="attachmentsManage.emit()">{{attachmentsTitle}}</button>
+          <button *ngIf="editMode" nz-button (click)="cancelEdit()">取消</button>
+          <button *ngIf="editMode" [disabled]="addOrEditBtnDisabled" [nzType]="'primary'" nz-button (click)="editModeSubmit.emit()">保存</button>
+        </ng-container>
+        <ng-container *ngIf="_addMode">
+          <button *ngIf="editMode" [disabled]="addOrEditBtnDisabled" [nzType]="'primary'" nz-button (click)="addModeSubmit.emit()">保存</button>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="!useCustomerBtns">
+      <ng-container *ngIf="!_addMode">
+        <button *ngIf="!editMode && showEditBtn" nz-button
+                [disabled]="editDisableFunc && editDisableFunc()"
+                (click)="startEdit()">编辑</button>
+        <button *ngIf="!editMode && showAttachmentsManage" nz-button   (click)="attachmentsManage.emit()">{{attachmentsTitle}}</button>
+        <button *ngIf="editMode && showEditCancelBtn" nz-button   (click)="cancelEdit()">取消</button>
+        <button *ngIf="editMode && showEditSaveBtn" [disabled]="addOrEditBtnDisabled" [nzType]="'primary'" nz-button [nzLoading]="editSaveBtnLoading"  (click)="editSaveFn()">保存</button>
+        <button *ngIf="editMode" [disabled]="addOrEditBtnDisabled" [nzType]="'primary'" nz-button [nzLoading]="editModeSubmitBtnLoading"  (click)="editModeSubmitFn()">{{addOrSaveBtnTitle}}</button>
+
+      </ng-container>
+      <ng-container *ngIf="_addMode">
+        <button *ngIf="editMode && showAddSaveBtn" [disabled]="addOrEditBtnDisabled" [nzType]="'primary'" [nzLoading]="addSaveBtnLoading" nz-button   (click)="addSaveFn()">保存</button>
+        <button *ngIf="editMode" [disabled]="addOrEditBtnDisabled" [nzType]="'primary'" nz-button  [nzLoading]="addModeSubmitBtnLoading" (click)="addModeSubmit.emit()">{{addOrSaveBtnTitle}}</button>
+      </ng-container>
+    </ng-container>
+  </div>
+  <nz-spin [nzSpinning]="loading">
+    <div class="js-content" [ngStyle]="{'paddingLeft.px': contentPadding, 'paddingTop.px': contentPadding, 'paddingBottom.px': contentPadding}">
+
+      <ng-container *ngFor="let section of sections; index as i;" >
+        <ng-container *ngIf="!section.hidden">
+          <ng-container *ngIf="section.collapsible">
+            <nz-collapseset [nzAccordion] = "true" [nzBordered]="true">
+              <nz-collapse [nzTitle]="section.title" [nzActive]="section.collapseActiveFunc()">
+                <app-detail-section
+                  [form]="form"
+                  [section]="section"
+                  [editMode]="editMode"
+                  [showErrorMessage]="showErrorMessage"
+                  [data]="data"
+                  [twoColumns]="twoColumns"
+                ></app-detail-section>
+              </nz-collapse>
+            </nz-collapseset>
+          </ng-container>
+
+          <ng-container *ngIf="!section.collapsible">
+            <app-detail-section
+              [form]="form"
+              [section]="section"
+              [editMode]="editMode"
+              [showErrorMessage]="showErrorMessage"
+              [data]="data"
+              [twoColumns]="twoColumns"
+            ></app-detail-section>
+          </ng-container>
+
+          <div *ngIf="i + 1 < sections.length && !section.hidden_divider" class="content-divider"></div>
+        </ng-container>
+      </ng-container>
+    </div>
+
+  </nz-spin>
+</div>

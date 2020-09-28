@@ -1,0 +1,49 @@
+<div>
+    this is a simple role conifg page,use more content
+    <p>{{roleName}} is from dynamic role</p>
+</div>
+<div>
+    <!--多多使用angular提供的动态指令，比如*ngFor,*ngIf-->
+    <p *ngIf="heroes.length >3">the heroes lenght is more than the 3</p>
+    <p *ngIf="heroes.length > 3">There are many heroes!</p>
+    <!--使用ngFor处理集合问题-->
+    <ul>
+        <li *ngFor="let hero of heroes">
+            the hero name is : {{hero}}
+        </li>
+    </ul>
+    <br>
+    <select>
+        <option *ngFor="let o of heroes">{{o}}</option>
+    </select>
+
+    <!--为什么*ngFor中的o可以,但是ng-repeat不可以？-->
+    <!-- <div>
+        <option ng-repeat="m in heroes">{{m}}</option>
+    </div> -->
+</div>
+<div>
+    <!--说明input也有多种分类,value设置,都没有-->
+    <!--大小写区分keyUp-->
+    <input type="text"  value="Good" name="name" (keyup)="onKey($event)"/>
+    <br>
+    <p>{{msg}}</p>
+    <br>
+    <!--第一个模板引用，0是绑定到变量-->
+    <input #box type="text" (keyup.enter) ="onEnter(box.value)">
+    <p>{{box.value}}</p>
+  
+    <img [src] ="imgSrc" height="50px" width="40px" />
+</div>
+<div>
+  <!--这个就是数据绑定，它一定是和某个变量关联-->
+  <button type="button" value="提交" height="50px" width="40px" (click)="onSave($event)">提交</button>
+  <br>
+</div>
+<div>
+    <!--Date在这里是一个管道的名称-->
+    <!-- <p>the heroes's  birthday is {{birthday | date:'yyyy-MM-hh HH-mm-ss'}}</p> -->
+</div>
+<script>
+    console.log("this is no error");
+</script>

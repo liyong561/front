@@ -1,0 +1,14 @@
+{
+  "name": "mycloud",
+  "version": "1.0.0",
+  "description": "my cloud apo",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "key"
+  ],
+  "author": "liyong",
+  "license": "MIT"
+}

@@ -1,0 +1,18 @@
+.login-body{
+    height: 100%;
+    width: 100%;
+}
+.img-container{
+    //background: url("../../../../../assets/images/logo/left_bg.png");
+    //background-position: right center;
+    //background-size: cover;
+    background: url("../../../assets/img/flower02.jpeg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    //background-position: right center;
+    //background-size: contain;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 19%;
+}

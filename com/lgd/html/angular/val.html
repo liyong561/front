@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<!--把下面script注释掉，其结果截然不同，说明这个js对这个html页面进行了二次解析-->
+<script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script> 
+</head>
+<body>
+
+    <!--有了这个ng-app才会被angularjs解析-->
+<div ng-app="">
+  <p>我的第一个表达式： {{ 5 + 5 }}</p>
+</div>
+
+</body>
+</html>

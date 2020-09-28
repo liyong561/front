@@ -1,0 +1,29 @@
+
+<!DOCTYPE HTML>
+<html>
+    <header>
+  <!--elementui的依赖-->
+  <link rel="stylesheet" href="/css/elementUI.css">
+  <script src="/js/vue.js"></script>
+  <script src="/js/elementUI.js"></script>
+    </header>
+    <body>
+        <div >
+        <div class="block">
+            <span class="demonstration">页数较少时的效果</span>
+            <el-pagination
+              layout="prev, pager, next"
+              :total="50">
+            </el-pagination>
+          </div>
+          <div class="block">
+            <span class="demonstration">大于 7 页时的效果</span>
+            <el-pagination
+              layout="prev, pager, next"
+              :total="1000">
+            </el-pagination>
+          </div>
+
+        </div>
+    </body>
+</html>

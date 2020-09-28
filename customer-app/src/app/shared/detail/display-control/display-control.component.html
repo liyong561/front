@@ -1,0 +1,102 @@
+<ng-container [ngSwitch]="item.control">
+
+  <ng-container *ngSwitchCase="'date'">
+    <span>{{ getValue(item) | date: 'yyyy-MM-dd'}}</span>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'date_readonly'">
+    <span>{{ getValue(item) | date: 'yyyy-MM-dd'}}</span>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'select'">
+    <span>{{ getValue(item) | jsSelectFormatter: item.control_select_options }}</span>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'select_readonly'">
+    <span>{{ getValue(item) | jsSelectFormatter: item.control_select_options }}</span>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'multi_select'">
+    <span>{{ getValue(item) | jsMultiSelectFormatter: item.control_select_options }}</span>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'search_select'">
+    <span>{{ getValue(item) }}</span>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'search_select_single'">
+    <span>{{ getValue(item) }}</span>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'dict_enum_single'">
+    <span>{{ getDictEnumValue(item) | async}}</span>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'dict_enum_multi'">
+    <span>{{ getMultiEnumValue(item) | async}}</span>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'number'">
+    <span>{{ getValue(item) | jsNumberFormatter:item.number_digits }}</span>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'percent'">
+    <span>{{ getValue(item) | jsPercentFormatter}}</span>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'two_number'">
+    <span>
+      {{item.two_number_1.title}}
+      {{ form.get(item.two_number_1.field).value | jsNumberFormatter:item.number_digits }}
+      &nbsp; | &nbsp;
+      {{item.two_number_2.title}}
+      {{ form.get(item.two_number_2.field).value | jsNumberFormatter:item.number_digits }}
+    </span>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'currency'">
+    <span>{{ getValue(item) | jsCurrencyFormatter}}</span>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'location_select'">
+    <span>{{ getLocationAddress(item)}}</span>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'editable_table'">
+    <app-table-eh
+      [rowsFormArray]="form.get(item.field)"
+      [columns]="item.editable_table_columns"
+      [editMode]="false"
+      [rowActions]="item.editable_table_row_actions"
+      [enableRowEdit]="item.enableRowEdit"
+      [enableRowDelete]="item.enableRowDelete"
+      [rowEditAction]="item.rowEditAction"
+      [rowDeleteAction]="item.rowDeleteAction"
+    ></app-table-eh>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'datetime'">
+    <span>{{ getValue(item) | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'cascade'">
+    <span>{{ getCascadeValue(item)}}</span>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'function'">
+    {{ item.formatterFunc(form?.getRawValue())}}
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'date_range'">
+    <app-date-range
+      [dtStart]="form.get(item.dateRangeStartDtField)"
+      [dtEnd]="form.get(item.dateRangeEndDtField)"
+      [editMode]="false"
+    ></app-date-range>
+  </ng-container>
+
+  <ng-container *ngSwitchDefault>
+    <span>{{ getValue(item) }}</span>
+  </ng-container>
+
+</ng-container>

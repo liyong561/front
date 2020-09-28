@@ -1,0 +1,17 @@
+
+<h1>标题会改变</h1>
+<div>
+    <h1>{{nameEn}}</h1>
+</div>
+<div>
+<ng-container *ngIf="language; else nameLg">
+    <h1>{{nameEn}}</h1>
+</ng-container>
+</div>
+<!--短横线不能有问题-->
+<!--   <ng-container *ngIf="!editCache[data.id].edit; else editTemplate"> -->
+<ng-template #nameLg>
+    <h1>{{nameZh}}</h1>
+</ng-template>
+
+<button (click)="transfer()">切换语言</button>

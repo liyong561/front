@@ -1,0 +1,62 @@
+<table border="1" cellspacing="0">
+    <tr><th>人名</th><th>第一列</th><th>第二列</th></tr>
+    <tr><td>用户1</td><td>c9</td><td>b2</td></tr>
+    <tr><td>用户2</td><td>c9</td><td>b3</td></tr>
+    <tr><td>用户三</td><td>c8</td><td>b3</td></tr>
+</table>
+<button onclick="tongji()">点击统计</button>
+<script>
+function tongji(){
+    tables=document.getElementsByTagName('table').item(0);
+    //是否修改原来的dom
+    // tables=tables.cloneNode(true);
+    //初始化列统计数据
+    statistics={}
+    for (var j=0;j<tables.rows[0].cells.length;j++){
+        eval("statistics.cols"+j+"={}");
+    }
+    //遍历
+    for (var i=0;i<tables.rows.length;i++){
+       if (i>0){//跳过第一行
+         for (var j=0;j<tables.rows[i].cells.length;j++){
+            if(j>0){//跳过第一列
+                text=tables.rows[i].cells[j].innerText;
+                if (text!=null){
+                    typeof statistics["cols"+j][text]=="undefined"?statistics["cols"+j][text]=1:statistics["cols"+j][text]++;
+                    // eval("typeof statistics.cols"+j+"."+text+"==\"undefined\"?statistics.cols"+j+"."+text+"=1:statistics.cols"+j+"."+text+"++")
+                }else{
+                    console.log(text);
+                }
+            }
+         } 
+       }
+    }
+    
+    newrow=tables.insertRow(tables.rows.length);
+    cnum=0;
+    for (i in statistics){
+        if(i=="cols0"){
+           newcol=newrow.insertCell(cnum++);
+           newcol.innerHTML="统计结果";
+        }else{
+            text="";
+            //排序整理
+            sort=Object.keys(statistics[i]).sort();
+            for (j in sort){
+              j=sort[j];
+              text+=j+"*"+statistics[i][j]+"<br>";
+            }
+            // console.log(text);
+            newcol=newrow.insertCell(cnum++);
+            newcol.innerHTML=text;
+        }
+    }
+    //打开新页面输出统计结果
+    // var show = window.open('');
+    // show.document.write(tables.outerHTML);
+    // show.document.title="统计结果";
+    // show.document.url="统计结果";
+    //控制台打印
+    // console.log(statistics);
+}
+</script>

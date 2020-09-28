@@ -1,0 +1,23 @@
+:host ::ng-deep {
+  .ant-input {
+    font-size: 12px !important;
+  }
+  .ant-calendar-picker-input {
+    width: 100%;
+  }
+  .ant-select {
+    width: 100%;
+  }
+  .ant-select-selection__placeholder {
+    font-size: 12px;
+  }
+  .ant-collapse-header {
+    font-size: 12px;
+  }
+  .ant-input-number {
+    width: 100%;
+  }
+  .ant-calendar-picker {
+    width: 100%;
+  }
+}
